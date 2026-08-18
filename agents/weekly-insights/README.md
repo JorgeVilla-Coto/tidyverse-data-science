@@ -32,10 +32,23 @@ scripts/weekly-insights-ledger.R   # calcula el contador de reportes entregados
 Corre como **Routine** de Claude Code (sesión nueva en cada disparo, sin memoria previa; por
 eso `PROMPT.md` es autocontenido).
 
+- Routine: `trig_01KDJTTCPvHNSMF9jZVKHnSe` — "Weekly Insights — shopper, consumidor, marcas, tendencias"
 - Cron: `0 14 * * 5` en UTC = **viernes 08:00 America/Costa_Rica** (UTC-6).
 - Entrega: correo directo vía Gmail, no borrador.
 - Cada corrida hace commit del reporte y de la fila del ledger en la rama
   `claude/weekly-insights-agent-lj1mei`.
+
+### ⚠️ Paso manual pendiente: conector de Gmail
+
+La Routine se creó **sin el conector de Gmail** porque la organización no permite adjuntar
+conectores a un trigger por API. Sin ese conector, la sesión del viernes investiga y escribe
+el reporte pero **no puede enviarlo**: el PASO 4(c) del prompt la manda a dejar el reporte en
+el repo y registrar `estado=detenido, motivo_parada=sin_acceso_correo`.
+
+Para habilitarlo: **claude.ai → Routines → "Weekly Insights" → habilitar el conector Gmail**.
+
+Cómo saber si quedó: después del primer viernes, revisar el ledger. Si la fila dice
+`sin_acceso_correo`, el conector sigue sin estar.
 
 ## Cómo verificar que funciona
 
