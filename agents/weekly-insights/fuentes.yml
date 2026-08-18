@@ -1,0 +1,100 @@
+# Universo de fuentes del agente Weekly Insights.
+# prioridad: alta = cuenta para el umbral de "fuentes caídas" (>=40% caídas => parada).
+# Editar este archivo es la forma soportada de cambiar el alcance del agente.
+
+ejes:
+  - shopper       # comportamiento en punto de venta, path to purchase, categoría, retail media
+  - consumidor    # actitudes, hábitos, segmentación, poder de compra, cultura de consumo
+  - marcas        # brand equity, posicionamiento, comunicación, pricing, portafolio
+  - tendencias    # señales emergentes, tecnología aplicada a consumo, macro-consumo
+
+capas:
+
+  academica:
+    prioridad: alta
+    fuentes:
+      - nombre: Journal of Marketing (AMA)
+        url: https://journals.sagepub.com/home/jmx
+      - nombre: Journal of Marketing Research
+        url: https://journals.sagepub.com/home/mrj
+      - nombre: Journal of Consumer Research
+        url: https://academic.oup.com/jcr
+      - nombre: Journal of Retailing
+        url: https://www.sciencedirect.com/journal/journal-of-retailing
+      - nombre: Journal of Retailing and Consumer Services
+        url: https://www.sciencedirect.com/journal/journal-of-retailing-and-consumer-services
+      - nombre: Marketing Science Institute
+        url: https://www.msi.org/articles/
+      - nombre: SSRN - Marketing eJournals
+        url: https://www.ssrn.com/index.cfm/en/marketing-research-network/
+      - nombre: NBER Working Papers
+        url: https://www.nber.org/papers
+
+  industria:
+    prioridad: alta
+    fuentes:
+      - nombre: Kantar - Insights
+        url: https://www.kantar.com/inspiration
+      - nombre: NIQ (NielsenIQ) - Insights
+        url: https://nielseniq.com/global/en/insights/
+      - nombre: Circana
+        url: https://www.circana.com/intelligence/
+      - nombre: Ipsos - Knowledge
+        url: https://www.ipsos.com/en/knowledge
+      - nombre: Euromonitor - Articles
+        url: https://www.euromonitor.com/articles
+      - nombre: McKinsey - Growth, Marketing & Sales
+        url: https://www.mckinsey.com/capabilities/growth-marketing-and-sales/our-insights
+      - nombre: Bain - Consumer Products
+        url: https://www.bain.com/insights/topics/consumer-products/
+      - nombre: BCG - Marketing & Sales
+        url: https://www.bcg.com/capabilities/marketing-sales/insights
+      - nombre: Deloitte - Consumer Industry
+        url: https://www.deloitte.com/global/en/Industries/consumer/research.html
+      - nombre: PwC - Voice of the Consumer
+        url: https://www.pwc.com/gx/en/industries/consumer-markets/consumer-insights-survey.html
+      - nombre: EY - Future Consumer Index
+        url: https://www.ey.com/en_gl/insights/consumer-products-retail/future-consumer-index
+      - nombre: Accenture - Consumer Research
+        url: https://www.accenture.com/us-en/insights/consumer-goods-services-index
+      - nombre: WARC
+        url: https://www.warc.com/
+      - nombre: Think with Google
+        url: https://www.thinkwithgoogle.com/
+
+  prensa:
+    prioridad: media
+    fuentes:
+      - nombre: Retail Dive
+        url: https://www.retaildive.com/
+      - nombre: Marketing Dive
+        url: https://www.marketingdive.com/
+      - nombre: Ad Age
+        url: https://adage.com/
+      - nombre: Campaign
+        url: https://www.campaignlive.com/
+      - nombre: Marketing Week
+        url: https://www.marketingweek.com/
+      - nombre: Path to Purchase Institute
+        url: https://p2pi.com/
+
+  datos_regionales:
+    prioridad: media
+    fuentes:
+      - nombre: CEPAL - Publicaciones
+        url: https://www.cepal.org/es/publicaciones
+      - nombre: World Bank - Research
+        url: https://www.worldbank.org/en/research
+      - nombre: INEC Costa Rica
+        url: https://inec.cr/
+      - nombre: BCCR - Indicadores económicos
+        url: https://www.bccr.fi.cr/
+      - nombre: Statista - Consumer Insights (público)
+        url: https://www.statista.com/outlook/consumer-market-insights
+
+entrega:
+  destinatario: jvc.villa@gmail.com
+  asunto_entrega: "[Weekly Insights] Semana {semana_iso} — {titular}"
+  asunto_parada: "[Weekly Insights] Sin entrega — {motivo}"
+  zona_horaria: America/Costa_Rica
+  horario: "viernes 08:00"
