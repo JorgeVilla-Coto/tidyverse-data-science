@@ -135,7 +135,7 @@ Ese contador se materializa en `evidencia/ledger.csv`, una fila por corrida:
 |---|---|
 | `fecha_ejecucion` | Timestamp UTC de la corrida |
 | `semana_iso` | Semana ISO cubierta (ej. `2026-W34`) |
-| `estado` | `entregado` \| `detenido` |
+| `estado` | `entregado` \| `detenido` \| `prueba` |
 | `motivo_parada` | Vacío si `entregado`; si no: `fuentes_caidas` \| `semana_seca` \| `sin_acceso_correo` \| `busqueda_sin_resultados` |
 | `fuentes_consultadas` | Cantidad de fuentes efectivamente consultadas |
 | `fuentes_caidas` | Cantidad que no respondió |
@@ -143,6 +143,9 @@ Ese contador se materializa en `evidencia/ledger.csv`, una fila por corrida:
 | `asunto` | Asunto exacto del correo enviado |
 | `ruta_reporte` | Ruta del reporte archivado |
 | `notas` | Observaciones de la corrida |
+
+`prueba` es para corridas manuales de validación: quedan registradas como evidencia de que el
+circuito funciona, pero **no cuentan** para el contador.
 
 **Contador:** `nrow(filter(ledger, estado == "entregado"))`. Se calcula con
 `scripts/weekly-insights-ledger.R` (tidyverse, consistente con el resto del repo) y se

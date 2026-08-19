@@ -1,1 +1,2 @@
 fecha_ejecucion,semana_iso,estado,motivo_parada,fuentes_consultadas,fuentes_caidas,hallazgos,asunto,ruta_reporte,notas
+2026-08-19T01:55:00Z,2026-W34,prueba,,22,0,3,"[Weekly Insights] PRUEBA (render corregido) — Semana 2026-W34 — La IA entró al momento de decidir",agents/weekly-insights/evidencia/reportes/PRUEBA-2026-W34.md,"Corrida de prueba manual. No cuenta para el contador. 22/22 dominios bloqueados por politica de egreso (403/407), 0 fuentes caidas. Primer envio salio con el htmlBody envuelto en CDATA y se reenvio corregido."

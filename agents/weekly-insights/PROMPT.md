@@ -82,6 +82,8 @@ PASO 6 — Entregar
 Enviá el correo con la herramienta de Gmail (mcp__Gmail__send_message; cargá su schema con
 ToolSearch si hace falta) a jvc.villa@gmail.com.
 Asunto de entrega: "[Weekly Insights] Semana <AAAA-Www> — <titular de la semana>".
+El htmlBody va como HTML plano: NO lo envuelvas en <![CDATA[ ]]> — el parser de correo se come
+la etiqueta contenedora y deja basura visible al final. Mandá siempre también el body en texto.
 Cerrá el correo con la línea: "Reporte #<contador> entregado".
 
 PASO 7 — Registrar evidencia
