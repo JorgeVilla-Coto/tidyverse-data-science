@@ -71,6 +71,27 @@ La falla es una semana sin fila ninguna: eso significa que la Routine no dispar�
 3. **Cambiar el horario** → `update_trigger` con otro cron, recordando que se guarda en UTC.
 4. **Pausar** → deshabilitar la Routine (`enabled: false`); el histórico se conserva.
 
+## Resultado de la corrida de prueba (19-ago-2026)
+
+Se ejecutó el procedimiento completo sobre la ventana 12–19 ago 2026. Hallazgos operativos:
+
+- **WebSearch funciona** y alcanza la web abierta: devolvió material fechado dentro de la
+  ventana en los cuatro ejes.
+- **WebFetch está denegado por la política de egreso del entorno** para *todos* los dominios
+  externos probados (22/22: journals, casas de investigación, prensa, incluso census.gov).
+  Devuelve 403/407 del proxy, no error de la fuente.
+- Por eso se ajustó la sección 3b de `AGENT.md`: **bloqueo de política ≠ fuente caída**. Si
+  contara como caída, el agente se detendría todas las semanas por infraestructura y nunca
+  entregaría. Ahora el hallazgo sobrevive marcado `[vía buscador]` con la confianza bajada un
+  nivel, y se agregó el motivo de parada `busqueda_sin_resultados` para cuando falle el canal
+  que sí importa.
+- El reporte de esa corrida está en `evidencia/reportes/PRUEBA-2026-W34.md`. **No se registró
+  en el ledger**: fue un ensayo, y el contador solo debe contar entregas reales.
+
+Para recuperar la verificación en fuente primaria hay que pedir que la política de egreso del
+entorno permita los dominios de `fuentes.yml`. Sin eso el agente sigue siendo útil, pero
+ningún hallazgo puede quedar en confianza `alta`.
+
 ## Límite conocido
 
 La sesión que dispara cada viernes clona la rama por defecto del repo. Mientras esta rama no

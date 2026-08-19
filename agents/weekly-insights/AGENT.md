@@ -79,6 +79,22 @@ El agente **se detiene y avisa** —no fabrica un reporte de relleno— si:
 - **Sin acceso a Gmail:** no puede entregar; deja el reporte en el repo y avisa por el canal
   disponible.
 
+#### Fuente caída ≠ dominio bloqueado por política
+Verificado en la corrida de prueba del 19-ago-2026: el proxy de egreso del entorno deniega
+por política (403/407) **todos** los dominios externos vía WebFetch, mientras que WebSearch
+sí alcanza la web abierta. Si esa denegación contara como "fuente caída", el agente se
+detendría todas las semanas por una razón de infraestructura, no de contenido.
+
+Por eso la distinción es parte de la decisión:
+| Situación | Cómo se trata |
+|---|---|
+| Bloqueo de egreso (403/407/EGRESS_BLOCKED) al abrir la fuente | **No** es fuente caída. El hallazgo se conserva, se marca `[vía buscador]` y **baja un nivel de confianza** (alta→media, media→exploratoria). |
+| La fuente responde pero con error, timeout o vacía | Sí cuenta como fuente caída. |
+| WebSearch no devuelve resultados utilizables en ≥40% de las combinaciones eje × capa | Parada por `busqueda_sin_resultados` — el canal efectivo se cayó. |
+
+Un reporte construido **solo** con buscador es válido, pero debe decirlo en el encabezado y
+ningún hallazgo puede quedar en confianza `alta`.
+
 En parada envía un **aviso corto** (asunto `[Weekly Insights] Sin entrega — <motivo>`) que
 dice qué falló, qué fuentes revisó y cuándo reintenta. El aviso **no** cuenta como reporte
 entregado en el contador.
@@ -95,8 +111,9 @@ Secuencia por corrida (detalle operativo en `PROMPT.md`):
 
 1. **Preparar** — leer `fuentes.yml` y el histórico del `ledger.csv`; fijar la ventana de fechas.
 2. **Barrer** — búsqueda por capa de fuente y por eje temático (4 ejes × 4 capas), registrando
-   qué fuente respondió y cuál falló.
+   qué fuente respondió, cuál falló y cuál quedó bloqueada por política de egreso.
 3. **Verificar** — abrir la fuente primaria de cada candidato; confirmar fecha, autoría y cifras.
+   Si el dominio está bloqueado, verificar hasta donde llegue el buscador y marcar `[vía buscador]`.
 4. **Filtrar** — aplicar el criterio de relevancia y la deduplicación contra las últimas 8 semanas.
 5. **Decidir entrega o parada** — evaluar las condiciones de parada.
 6. **Redactar** — armar el reporte con la plantilla `plantilla-reporte.md`.
@@ -119,7 +136,7 @@ Ese contador se materializa en `evidencia/ledger.csv`, una fila por corrida:
 | `fecha_ejecucion` | Timestamp UTC de la corrida |
 | `semana_iso` | Semana ISO cubierta (ej. `2026-W34`) |
 | `estado` | `entregado` \| `detenido` |
-| `motivo_parada` | Vacío si `entregado`; si no: `fuentes_caidas` \| `semana_seca` \| `sin_acceso_correo` |
+| `motivo_parada` | Vacío si `entregado`; si no: `fuentes_caidas` \| `semana_seca` \| `sin_acceso_correo` \| `busqueda_sin_resultados` |
 | `fuentes_consultadas` | Cantidad de fuentes efectivamente consultadas |
 | `fuentes_caidas` | Cantidad que no respondió |
 | `hallazgos` | Hallazgos incluidos en el reporte |

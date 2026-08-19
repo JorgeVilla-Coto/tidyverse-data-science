@@ -33,12 +33,19 @@ Buscá por cada eje (shopper, consumidor, marcas, tendencias) en las cuatro capa
              EY Future Consumer Index, Accenture, WARC, Think with Google
   prensa:    Retail Dive, Marketing Dive, Ad Age, Campaign, Marketing Week, Path to Purchase Institute
   regional:  CEPAL, World Bank, INEC Costa Rica, BCCR, Statista (público)
-Usá WebSearch para descubrir y WebFetch para leer la fuente primaria. Llevá la cuenta de
-cuántas fuentes consultaste y cuáles no respondieron (error, timeout, bloqueo).
+Usá WebSearch como canal primario de descubrimiento Y de lectura, y WebFetch para verificar
+en la fuente original. OJO: en este entorno el proxy de egreso deniega por política casi todos
+los dominios externos vía WebFetch. Ese bloqueo NO es una fuente caída: seguí adelante con lo
+que devuelva WebSearch. Llevá tres cuentas separadas: fuentes consultadas, fuentes caídas
+(error/timeout/vacío de la fuente misma) y dominios bloqueados por política.
 
 PASO 2 — Verificar
 Abrí la fuente primaria de cada candidato. Confirmá fecha de publicación, autoría y las
 cifras que vayas a citar. Si no podés verificar una cifra, omitila o marcala [no verificado].
+Si el dominio está bloqueado por política de egreso, verificá hasta donde llegue el buscador,
+marcá el hallazgo [vía buscador] y bajale un nivel la confianza (alta->media, media->exploratoria).
+Un reporte armado solo con buscador es válido, pero decilo en el encabezado y no dejes ningún
+hallazgo en confianza alta.
 Si la fuente es de pago, usá solo el abstract público y marcá [paywall].
 No cites nada sin enlace. No inventes cifras, muestras ni fechas.
 
@@ -51,9 +58,12 @@ Máximo 7 hallazgos, ordenados por impacto. Cuatro sólidos valen más que doce 
 
 PASO 4 — Decidir: entregar o detenerse
 DETENERSE Y AVISAR si se cumple cualquiera de estas:
-  a) >=40% de las fuentes de prioridad alta (capas academica e industria) no respondieron.
+  a) >=40% de las fuentes de prioridad alta (capas academica e industria) respondieron con
+     error, timeout o vacío. Los dominios bloqueados por política de egreso NO cuentan aquí.
   b) Menos de 3 hallazgos superaron el filtro del PASO 3 (semana seca).
   c) No hay acceso a Gmail para entregar.
+  d) WebSearch no devolvió resultados utilizables en >=40% de las combinaciones eje x capa
+     (motivo_parada = busqueda_sin_resultados): se cayó el canal efectivo.
 En los casos (a) y (b): enviá un aviso corto con asunto
 "[Weekly Insights] Sin entrega — <fuentes caídas|semana seca>" explicando qué falló, qué
 fuentes se revisaron, qué sí se encontró aunque no calificara, y que el próximo intento es
